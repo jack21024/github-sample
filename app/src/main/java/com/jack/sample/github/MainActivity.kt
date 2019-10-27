@@ -6,6 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jack.sample.github.databinding.ActivityMainBinding
 import androidx.lifecycle.ViewModelProviders
+import com.jack.sample.github.adapter.UsersAdapter
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var _binding: ActivityMainBinding
@@ -26,7 +28,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun initAllList() {
         _binding.mainListUser.let {
+            val adapter = UsersAdapter()
             it.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            it.adapter = adapter
+            _viewModel.userList.subscribe { users ->
+                adapter.submitList(users)
+            }
         }
         _binding.mainListRepo.let {
             it.layoutManager = LinearLayoutManager(this)

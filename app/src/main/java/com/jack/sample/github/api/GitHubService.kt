@@ -14,19 +14,27 @@ import retrofit2.http.Url
 interface GitHubService {
 
     companion object {
-        const val BASE_URL = "https://api.github.com"
+        const val HOST_API = "api.github.com" //$NON-NLS-1$
+        const val HEADER_LINK = "Link" //$NON-NLS-1$
+        const val HEADER_NEXT = "X-Next" //$NON-NLS-1$
+        const val HEADER_LAST = "X-Last" //$NON-NLS-1$
+        const val META_REL = "rel" //$NON-NLS-1$
+        const val META_LAST = "last" //$NON-NLS-1$
+        const val META_NEXT = "next" //$NON-NLS-1$
+        const val META_FIRST = "first" //$NON-NLS-1$
+        const val META_PREV = "prev" //$NON-NLS-1$
     }
 
     @GET("/users")
     fun getUsers(
         @Query("since") since: Int,
         @Query("per_page") perPage: Int
-    ): Single<List<User>>
+    ): Single<Response<List<User>>>
 
     @GET
     fun getUsers (
         @Url url: String
-    ): io.reactivex.Single<Response<List<User>>>
+    ): Single<Response<List<User>>>
 
     @GET("/users/{username}")
     fun getUserIntro (

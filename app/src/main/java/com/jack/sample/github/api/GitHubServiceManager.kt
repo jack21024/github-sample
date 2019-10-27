@@ -4,11 +4,11 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-object GitHubServiceImpl {
+object GitHubServiceManager {
 
     private val retrofit =
         Retrofit.Builder()
-            .baseUrl(GitHubService.BASE_URL)
+            .baseUrl(getBaseUrl())
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
@@ -17,4 +17,7 @@ object GitHubServiceImpl {
         retrofit.create(GitHubService::class.java)
 
     val service: GitHubService = githubService
+
+    private fun getBaseUrl() = "https://${GitHubService.HOST_API}"
+
 }
