@@ -1,14 +1,31 @@
 package com.jack.sample.github.api
 
+import com.jack.sample.github.BuildConfig
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import okhttp3.logging.HttpLoggingInterceptor
+
+
 
 object GitHubServiceManager {
 
+    private const val BASE_URL = "https://${GitHubService.HOST_API}"
+
+    private val httpClient = OkHttpClient.Builder().run {
+        if (BuildConfig.DEBUG) {
+            val loggingInterceptor = HttpLoggingInterceptor()
+            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+            this.addInterceptor(loggingInterceptor)
+        }
+        this.build()
+    }
+
     private val retrofit =
         Retrofit.Builder()
-            .baseUrl(getBaseUrl())
+            .baseUrl(BASE_URL)
+            .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
@@ -16,8 +33,7 @@ object GitHubServiceManager {
     private val githubService =
         retrofit.create(GitHubService::class.java)
 
-    val service: GitHubService = githubService
 
-    private fun getBaseUrl() = "https://${GitHubService.HOST_API}"
+    val service: GitHubService = githubService
 
 }
