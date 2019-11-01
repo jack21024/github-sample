@@ -16,9 +16,12 @@ import com.jack.sample.github.model.User
 class UsersAdapter : PagedListAdapter<User, UsersAdapter.ViewHolder>(UserDiff) {
 
 
+    var onClickListener: View.OnClickListener? = null
+
     private fun createViewHolder(view: View) : ViewHolder {
         val avatar: ImageView = view.findViewById(R.id.list_item_user_avatar)
         val username: TextView = view.findViewById(R.id.list_item_user_username)
+        view.setOnClickListener(onClickListener)
         return ViewHolder(view,username, avatar)
     }
 

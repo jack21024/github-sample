@@ -2,6 +2,7 @@ package com.jack.sample.github.api
 
 import com.jack.sample.github.model.User
 import com.jack.sample.github.model.UserIntro
+import com.jack.sample.github.model.UserRepo
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.Call
@@ -43,8 +44,8 @@ interface GitHubService {
 
     @GET("/users/{user}/repos")
     fun getUserRepos(
-        @Query("user") user: String
-    ): Call<Any>
+        @Path("user") user: String
+    ): Single<List<UserRepo>>
 
     @GET("/search/users")
     fun searchUsers(
