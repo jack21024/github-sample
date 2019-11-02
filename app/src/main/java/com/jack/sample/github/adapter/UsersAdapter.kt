@@ -1,6 +1,5 @@
 package com.jack.sample.github.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,17 +12,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.jack.sample.github.R
 import com.jack.sample.github.model.User
+import kotlinx.android.synthetic.main.lsit_item_user.view.*
 
 class UsersAdapter : PagedListAdapter<User, UsersAdapter.ViewHolder>(UserDiff) {
-
 
     var onClickListener: View.OnClickListener? = null
 
     private fun createViewHolder(view: View) : ViewHolder {
-        val avatar: ImageView = view.findViewById(R.id.list_item_user_avatar)
-        val username: TextView = view.findViewById(R.id.list_item_user_username)
         view.setOnClickListener(onClickListener)
-        return ViewHolder(view,username, avatar)
+        return ViewHolder(view)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,7 +31,7 @@ class UsersAdapter : PagedListAdapter<User, UsersAdapter.ViewHolder>(UserDiff) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var user = getItem(position)!!
-        holder.username.text =user.login
+        holder.login.text =user.login
         Glide.with(holder.itemView.context)
             .load(user.avatar_url)
             .placeholder(R.color.colorPrimary)
@@ -43,11 +40,11 @@ class UsersAdapter : PagedListAdapter<User, UsersAdapter.ViewHolder>(UserDiff) {
     }
 
 
-    class ViewHolder(
-        itemView: View,
-        var username: TextView,
-        var avatar: ImageView
-    ) : RecyclerView.ViewHolder(itemView)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val avatar: ImageView = itemView.item_user_avatar
+        val login: TextView = itemView.item_user_username
+    }
+
 }
 
 private object UserDiff: DiffUtil.ItemCallback<User> () {

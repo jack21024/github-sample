@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.jack.sample.github.R
 import com.jack.sample.github.model.UserRepo
+import kotlinx.android.synthetic.main.list_item_user_repo.view.*
 
 class UserRepoAdapter : RecyclerView.Adapter<UserRepoAdapter.ViewHolder>() {
 
@@ -19,10 +20,8 @@ class UserRepoAdapter : RecyclerView.Adapter<UserRepoAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_user_repo, null, false)
-        var desc: TextView = view.findViewById(R.id.item_userrepo_tv_desc)
-        var update_at: TextView = view.findViewById(R.id.item_userrepo_tv_update_at)
-        return ViewHolder(view, desc, update_at)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_user_repo, null, false)
+        return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -35,10 +34,8 @@ class UserRepoAdapter : RecyclerView.Adapter<UserRepoAdapter.ViewHolder>() {
         holder.update_at.text = item.updated_at
     }
 
-
-    class ViewHolder(
-        itemView: View,
-        var desc: TextView,
-        var update_at: TextView
-    ) : RecyclerView.ViewHolder(itemView)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val desc: TextView = itemView.item_userrepo_tv_desc
+        val update_at: TextView = itemView.item_userrepo_tv_update_at
+    }
 }
