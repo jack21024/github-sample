@@ -1,4 +1,4 @@
-package com.jack.sample.github.adapter
+package com.jack.sample.github.view.adapter
 
 import android.view.LayoutInflater
 import android.view.View

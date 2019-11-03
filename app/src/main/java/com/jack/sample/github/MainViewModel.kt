@@ -24,17 +24,24 @@ class MainViewModel : ViewModel() {
 
     private fun createUserListObservable() : Observable<PagedList<User>> {
         return usersRepo.getUsers().concatMap {
+            Log.e("Card", "MainViewModel#createUserListObservable#usersRepo")
             it.addWeakCallback(it, object : PagedList.Callback() {
-                override fun onChanged(position: Int, count: Int) {}
+                override fun onChanged(position: Int, count: Int) {
+                    Log.e("MainViewModel", "MainViewModel#onChanged")
+                }
 
                 override fun onInserted(position: Int, count: Int) {
+                    Log.e("Card", "MainViewModel#onInserted callback=${this}")
                     it.removeWeakCallback(this)
                     if(count > 0) {
+                        Log.e("Card", "MainViewModel#queryUserRepoList")
                         queryUserRepoList(it[0]!!.login)
                     }
                 }
 
-                override fun onRemoved(position: Int, count: Int) {}
+                override fun onRemoved(position: Int, count: Int) {
+                    Log.e("Card", "MainViewModel#onRemoved")
+                }
 
             })
 
@@ -43,10 +50,11 @@ class MainViewModel : ViewModel() {
     }
 
     fun queryUserRepoList(name: String) {
+        Log.d("Card", "MainViewModel#queryUserRepoList# login=$name")
         UserRepoRepository()
             .getRepository(name)
             .subscribe({
-                Log.d("MainViewModel", "queryUserRepoList#")
+                Log.d("Card", "MainViewModel#queryUserRepoList#subscribe repoList.size=${it.size}")
                 userRepoList.postValue(it)
             }, {
 

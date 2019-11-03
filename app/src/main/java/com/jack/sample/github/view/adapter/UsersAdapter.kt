@@ -1,4 +1,4 @@
-package com.jack.sample.github.adapter
+package com.jack.sample.github.view.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.jack.sample.github.R
 import com.jack.sample.github.model.User
-import kotlinx.android.synthetic.main.lsit_item_user.view.*
+import kotlinx.android.synthetic.main.lsit_item_user_avatar_cell.view.*
 
 class UsersAdapter : PagedListAdapter<User, UsersAdapter.ViewHolder>(UserDiff) {
 
@@ -25,7 +25,7 @@ class UsersAdapter : PagedListAdapter<User, UsersAdapter.ViewHolder>(UserDiff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.lsit_item_user, parent, false)
+            .inflate(R.layout.lsit_item_user_avatar_cell, parent, false)
         return createViewHolder(view)
     }
 
@@ -41,8 +41,8 @@ class UsersAdapter : PagedListAdapter<User, UsersAdapter.ViewHolder>(UserDiff) {
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val avatar: ImageView = itemView.item_user_avatar
-        val login: TextView = itemView.item_user_username
+        val avatar: ImageView = itemView.item_user_avatar_cell_icon
+        val login: TextView = itemView.item_user_avatar_cell_login
     }
 
 }

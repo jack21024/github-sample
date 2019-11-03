@@ -15,20 +15,6 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#08000000"
-            android:visibility="@{viewModel.loading? View.VISIBLE : View.GONE}">
-
-            <ProgressBar
-                android:id="@+id/main_progress_all"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-
-        </FrameLayout>
-
         <TextView
             android:id="@+id/main_text_users"
             android:layout_width="match_parent"
@@ -50,26 +36,25 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_list_user"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_view_separator1" />
-
-        <View
-            android:id="@+id/main_view_separator2"
-            style="@style/separator_hor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_list_user" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/main_list_repo"
-            android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_view_separator2" />
+            app:layout_constraintTop_toBottomOf="@+id/main_view_separator1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#08000000"
+            android:visibility="@{viewModel.loading? View.VISIBLE : View.GONE}">
+
+            <ProgressBar
+                android:id="@+id/main_progress_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
