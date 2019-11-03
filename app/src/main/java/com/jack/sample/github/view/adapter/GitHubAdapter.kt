@@ -11,12 +11,19 @@ class GitHubAdapter(
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     fun updateRepositoryData(newData: MutableList<ICardView>) {
-        val newDataSize = newData.size
-        val avatarCard = cards[0]
-        cards.clear()
-        cards.add(avatarCard)
+        removeExpiredRepositoryData()
         cards.addAll(newData)
-        notifyItemRangeChanged(1, newDataSize)
+        notifyItemRangeChanged(1, cards.lastIndex)
+    }
+
+    private fun removeExpiredRepositoryData() {
+        val avatarCard = cards[0]
+        val oldSize = cards.size
+        if(oldSize > 0) {
+            cards.clear()
+            notifyItemRangeRemoved(1, oldSize - 2)
+        }
+        cards.add(avatarCard)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
