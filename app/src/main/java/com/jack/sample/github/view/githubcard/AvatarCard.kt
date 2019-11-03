@@ -1,5 +1,6 @@
 package com.jack.sample.github.view.githubcard
 
+import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import androidx.paging.PagedList
@@ -18,10 +19,17 @@ class AvatarCard(
 
     var viewModel: MainViewModel? = null
 
+    private var avatarLayoutManager: LinearLayoutManager? = null
+        set(value) {
+            restoreAvatarState(value)
+            field = value
+        }
+
     private val avatarAdapter = UsersAdapter()
 
-    private val viewPool = RecyclerView.RecycledViewPool()
+    private val avatarPool = RecyclerView.RecycledViewPool()
 
+    private var avatarState: Parcelable? = null
 
     override val viewTypeId: Int =
         CardViewHolderId.VIEW_TYPE_USER_AVATAR
@@ -44,8 +52,9 @@ class AvatarCard(
 
         if (holder is ViewHolder) {
             val context = holder.itemView.context
-            val layoutManager =
+            avatarLayoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
             holder.avatarList.apply {
                 avatarAdapter.onClickListener = View.OnClickListener { view ->
                     val pos = this.getChildAdapterPosition(view)
@@ -56,11 +65,30 @@ class AvatarCard(
                     item?.run { viewModel?.queryUserRepoList(this.login) }
                 }
                 this.adapter = avatarAdapter
-                this.layoutManager = layoutManager
-                this.setRecycledViewPool(viewPool)
+                this.layoutManager = avatarLayoutManager
+                this.setRecycledViewPool(avatarPool)
             }
         }
     }
+
+    override fun onViewRecycled(holder: BaseViewHolder) {
+        saveAvatarState()
+    }
+
+    private fun saveAvatarState() {
+        avatarLayoutManager?.let {
+            Log.d("Card", "AvatarCard#saveAvatarState")
+            avatarState = it.onSaveInstanceState()
+        }
+    }
+
+    private fun restoreAvatarState(layoutManager: LinearLayoutManager?) {
+        avatarState?.let {
+            Log.d("Card", "AvatarCard#restoreAvatarState")
+            layoutManager?.onRestoreInstanceState(it)
+        }
+    }
+
 
     class ViewHolder(itemView: View) : BaseViewHolder(itemView) {
         val avatarList: RecyclerView = itemView.item_user_avatar_list

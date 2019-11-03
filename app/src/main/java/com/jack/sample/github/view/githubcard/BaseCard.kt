@@ -1,6 +1,5 @@
 package com.jack.sample.github.view.githubcard
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,12 +16,15 @@ abstract class BaseCard : ICardView {
         val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
         return getViewHolder(view)
     }
+
+    override fun onViewRecycled(holder: BaseViewHolder) { }
 }
 
 interface ICardView {
     val viewTypeId: Int
     fun createViewHolder(parent: ViewGroup): BaseViewHolder
     fun bindViewHolder(holder: BaseViewHolder)
+    fun onViewRecycled(holder: BaseViewHolder)
 }
 
 open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
