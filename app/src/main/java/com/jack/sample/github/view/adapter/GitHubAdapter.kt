@@ -20,7 +20,7 @@ class GitHubAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        return CardViewHolderId.getViewHolderById(parent.context, viewType)
+        return CardViewHolderId.getViewHolderById(parent, viewType)
     }
 
     override fun getItemViewType(position: Int): Int {
