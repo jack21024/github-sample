@@ -1,17 +1,33 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="title_bar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:textStyle">italic|bold</item>
+        <item name="android:textColor">@color/gs_black_90</item>
+        <item name="android:typeface">serif</item>
     </style>
 
     <style name="separator_hor">
         <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.6dp</item>
+        <item name="android:background">@color/gs_black_30</item>
+    </style>
+
+    <style name="separator_hor_thin" parent="separator_hor">
         <item name="android:layout_height">0.5dp</item>
-        <item name="android:background">@color/gs_black_20pa</item>
+        <item name="android:background">@color/gs_black_20</item>
     </style>
 
 </resources>

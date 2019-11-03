@@ -86,7 +86,7 @@
 
     <View
         android:id="@+id/item_userrepo_view_separator"
-        style="@style/separator_hor"
+        style="@style/separator_hor_thin"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 

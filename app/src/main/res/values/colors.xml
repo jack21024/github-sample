@@ -4,8 +4,10 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="gs_black_20pa">#32000000</color>
-    <color name="gs_black_5pa">#0D000000</color>
+    <color name="gs_black_90">#212121</color>
+    <color name="gs_black_30">#4D000000</color>
+    <color name="gs_black_20">#32000000</color>
+    <color name="gs_black_5">#0D000000</color>
 
     <color name="gs_gray">#E0E0E0</color>
 </resources>

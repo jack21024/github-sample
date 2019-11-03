@@ -10,6 +10,6 @@
         android:layout_height="wrap_content" />
 
     <View
-        style="@style/separator_hor" />
+        style="@style/separator_hor_thin" />
 
 </LinearLayout>

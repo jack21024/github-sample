@@ -17,13 +17,10 @@
 
         <TextView
             android:id="@+id/main_text_users"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center_vertical"
+            style="@style/title_bar"
+            android:gravity="center"
             android:padding="8dp"
-            android:text="Users"
-            android:textSize="16dp"
-            android:textStyle="bold"
+            android:text="Github"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,7 +43,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gs_black_5pa"
+            android:background="@color/gs_black_5"
             android:visibility="@{viewModel.loading? View.VISIBLE : View.GONE}">
 
             <ProgressBar
