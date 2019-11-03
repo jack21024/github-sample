@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="gs_black_20pa">#32000000</color>
+    <color name="gs_black_5pa">#0D000000</color>
+
+    <color name="gs_gray">#E0E0E0</color>
 </resources>

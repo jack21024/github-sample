@@ -34,7 +34,7 @@ class UsersAdapter : PagedListAdapter<User, UsersAdapter.ViewHolder>(UserDiff) {
         holder.login.text =user.login
         Glide.with(holder.itemView.context)
             .load(user.avatar_url)
-            .placeholder(R.color.colorPrimary)
+            .placeholder(R.drawable.placeholder_circle_gray_72)
             .apply(RequestOptions.circleCropTransform())
             .into(holder.avatar)
     }

@@ -14,7 +14,7 @@
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
         android:layout_gravity="center"
-        tools:background="@color/colorPrimary" />
+        tools:background="@drawable/placeholder_circle_gray_72" />
 
     <TextView
         android:id="@+id/item_user_avatar_cell_login"
