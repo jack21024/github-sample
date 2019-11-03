@@ -1,22 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingBottom="10dp"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:background="@color/colorPrimary"
+    >
+
+    <ImageView
+        android:id="@+id/item_userrepo_iv_avatar"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:background="@color/colorAccent" />
+
+    <ImageView
+        android:id="@+id/item_userrepo_iv_star"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_star_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_userrepo_iv_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_userrepo_iv_avatar" />
+
+    <TextView
+        android:id="@+id/item_userrepo_tv_star_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_userrepo_iv_avatar"
+        app:layout_constraintEnd_toStartOf="@+id/item_userrepo_iv_star"
+        app:layout_constraintTop_toTopOf="@+id/item_userrepo_iv_avatar"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/item_userrepo_tv_fullname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:textSize="16dp"
+        app:layout_constraintTop_toTopOf="@+id/item_userrepo_iv_avatar"
+        app:layout_constraintStart_toEndOf="@+id/item_userrepo_iv_avatar"
+        app:layout_constraintBottom_toBottomOf="@+id/item_userrepo_iv_avatar"
+        tools:text="FULL_NAME" />
 
     <TextView
         android:id="@+id/item_userrepo_tv_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:textSize="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/item_userrepo_iv_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:text="DESCRIPTION" />
 
     <TextView
         android:id="@+id/item_userrepo_tv_update_at"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:textSize="16dp"
-        tools:text="UPDATE_AT" />
-</LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_userrepo_tv_desc"
+        tools:text="2019-06-14" />
+
+    <TextView
+        android:id="@+id/item_userrepo_tv_update_at_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="8dp"
+        android:text="update:"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/item_userrepo_tv_update_at"
+        app:layout_constraintTop_toBottomOf="@+id/item_userrepo_tv_desc"
+        app:layout_constraintBottom_toTopOf="@+id/item_userrepo_view_separator" />
+
+    <View
+        android:id="@+id/item_userrepo_view_separator"
+        style="@style/separator_hor"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
