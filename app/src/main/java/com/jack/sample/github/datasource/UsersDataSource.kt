@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.util.Log
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
-import com.jack.sample.github.api.GitHubPageLinks
-import com.jack.sample.github.api.GitHubService
-import com.jack.sample.github.api.GitHubServiceManager
+import com.jack.sample.github.api.GithubPageLinks
+import com.jack.sample.github.api.GithubService
+import com.jack.sample.github.api.GithubServiceManager
 import com.jack.sample.github.model.User
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Response
@@ -27,7 +27,7 @@ class UsersDataSource : PageKeyedDataSource<String, User>() {
         private const val PER_PAGE = 20
     }
 
-    private val service: GitHubService = GitHubServiceManager.service
+    private val service: GithubService = GithubServiceManager.SERVICE
 
     @SuppressLint("CheckResult")
     override fun loadInitial(
@@ -63,7 +63,7 @@ class UsersDataSource : PageKeyedDataSource<String, User>() {
     private fun handleResponse(response: Response<List<User>>): UserPage? {
         if (response.isSuccessful) {
             response.body()?.run {
-                return UserPage(this, GitHubPageLinks.getNext(response.headers()))
+                return UserPage(this, GithubPageLinks.getNext(response.headers()))
             }
         }
         return null

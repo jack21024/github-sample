@@ -1,22 +1,22 @@
 package com.jack.sample.github.api
 
-import com.jack.sample.github.api.GitHubService.Companion.HEADER_LAST
-import com.jack.sample.github.api.GitHubService.Companion.HEADER_LINK
-import com.jack.sample.github.api.GitHubService.Companion.HEADER_NEXT
-import com.jack.sample.github.api.GitHubService.Companion.META_FIRST
-import com.jack.sample.github.api.GitHubService.Companion.META_LAST
-import com.jack.sample.github.api.GitHubService.Companion.META_NEXT
-import com.jack.sample.github.api.GitHubService.Companion.META_PREV
-import com.jack.sample.github.api.GitHubService.Companion.META_REL
+import com.jack.sample.github.api.GithubService.Companion.HEADER_LAST
+import com.jack.sample.github.api.GithubService.Companion.HEADER_LINK
+import com.jack.sample.github.api.GithubService.Companion.HEADER_NEXT
+import com.jack.sample.github.api.GithubService.Companion.META_FIRST
+import com.jack.sample.github.api.GithubService.Companion.META_LAST
+import com.jack.sample.github.api.GithubService.Companion.META_NEXT
+import com.jack.sample.github.api.GithubService.Companion.META_PREV
+import com.jack.sample.github.api.GithubService.Companion.META_REL
 import okhttp3.Headers
 
-class GitHubPageLinks(headers: Headers) {
+class GithubPageLinks(headers: Headers) {
 
     companion object {
         private val DELIM_LINKS = "," //$NON-NLS-1$
         private val DELIM_LINK_PARAM = ";" //$NON-NLS-1$
 
-        fun getNext(headers: Headers): String = GitHubPageLinks(headers).next
+        fun getNext(headers: Headers): String = GithubPageLinks(headers).next
     }
 
     lateinit var first: String

@@ -12,7 +12,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Url
 
-interface GitHubService {
+interface GithubService {
 
     companion object {
         const val HOST_API = "api.github.com" //$NON-NLS-1$

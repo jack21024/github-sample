@@ -9,9 +9,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 
 
-object GitHubServiceManager {
+object GithubServiceManager {
 
-    private const val BASE_URL = "https://${GitHubService.HOST_API}"
+    private const val BASE_URL = "https://${GithubService.HOST_API}"
 
     private val httpClient = OkHttpClient.Builder().run {
         if (BuildConfig.DEBUG) {
@@ -31,9 +31,9 @@ object GitHubServiceManager {
             .build()
 
     private val githubService =
-        retrofit.create(GitHubService::class.java)
+        retrofit.create(GithubService::class.java)
 
 
-    val service: GitHubService = githubService
+    val SERVICE: GithubService = githubService
 
 }
