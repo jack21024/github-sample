@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initList() {
-        val githubCards = getGithubListCard()
+        val githubCards = getGithubCard()
 
         _binding.mainListUser.apply {
             val githubAdapter = GithubAdapter(githubCards)
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getGithubListCard() : MutableList<IGithubCard>{
+    private fun getGithubCard() : MutableList<IGithubCard>{
         val avatarCard = AvatarCard(_viewModel.userList)
         avatarCard.viewModel = _viewModel
         return  mutableListOf(avatarCard)

@@ -19,7 +19,7 @@
             android:id="@+id/main_text_users"
             style="@style/title_bar"
             android:gravity="center"
-            android:padding="8dp"
+            android:padding="@dimen/common_padding_small"
             android:text="Github"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +44,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/gs_gray_100"
-            android:visibility="@{viewModel.loading? View.VISIBLE : View.GONE}">
+            android:visibility="@{viewModel.loading? View.VISIBLE : View.GONE}"
+            tools:background="@android:color/transparent" >
 
             <ProgressBar
                 android:id="@+id/main_progress_all"

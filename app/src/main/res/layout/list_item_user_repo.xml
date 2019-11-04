@@ -4,14 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="8dp"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
-    android:paddingBottom="10dp"
+    android:paddingTop="@dimen/common_padding_large"
+    android:paddingLeft="@dimen/common_padding_large"
+    android:paddingRight="@dimen/common_padding_large"
+    android:paddingBottom="@dimen/list_item_space"
     android:gravity="center"
-    android:orientation="vertical"
-    tools:background="@color/colorPrimary"
-    >
+    android:orientation="vertical" >
 
     <ImageView
         android:id="@+id/item_userrepo_iv_avatar"
@@ -19,7 +17,7 @@
         android:layout_height="36dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:background="@color/colorAccent" />
+        tools:background="@drawable/placeholder_circle_gray_24" />
 
     <ImageView
         android:id="@+id/item_userrepo_iv_star"
@@ -32,20 +30,23 @@
 
     <TextView
         android:id="@+id/item_userrepo_tv_star_count"
+        style="@style/lala_text_context_normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingRight="4dp"
+        android:layout_marginRight="@dimen/common_space_normal"
+        android:textSize="@dimen/text_small"
         app:layout_constraintBottom_toBottomOf="@+id/item_userrepo_iv_avatar"
         app:layout_constraintEnd_toStartOf="@+id/item_userrepo_iv_star"
         app:layout_constraintTop_toTopOf="@+id/item_userrepo_iv_avatar"
-        android:text="0" />
+        android:text="0"
+        tools:text="46"/>
 
     <TextView
         android:id="@+id/item_userrepo_tv_fullname"
+        style="@style/lala_text_title_normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:textSize="16dp"
+        android:layout_marginLeft="@dimen/common_space_normal"
         app:layout_constraintTop_toTopOf="@+id/item_userrepo_iv_avatar"
         app:layout_constraintStart_toEndOf="@+id/item_userrepo_iv_avatar"
         app:layout_constraintBottom_toBottomOf="@+id/item_userrepo_iv_avatar"
@@ -53,40 +54,40 @@
 
     <TextView
         android:id="@+id/item_userrepo_tv_desc"
+        style="@style/lala_text_context_normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textSize="16dp"
+        android:layout_marginTop="@dimen/common_padding_large"
         app:layout_constraintTop_toBottomOf="@+id/item_userrepo_iv_avatar"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="DESCRIPTION" />
 
     <TextView
         android:id="@+id/item_userrepo_tv_update_at"
+        style="@style/lala_text_context_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textSize="16dp"
+        android:layout_marginTop="@dimen/common_padding_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_userrepo_tv_desc"
         tools:text="2019-06-14" />
 
     <TextView
         android:id="@+id/item_userrepo_tv_update_at_tag"
+        style="@style/lala_text_context_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginRight="@dimen/common_space_small"
         android:text="update:"
-        android:textSize="16dp"
         app:layout_constraintEnd_toStartOf="@+id/item_userrepo_tv_update_at"
-        app:layout_constraintTop_toBottomOf="@+id/item_userrepo_tv_desc"
-        app:layout_constraintBottom_toTopOf="@+id/item_userrepo_view_separator" />
+        app:layout_constraintTop_toTopOf="@+id/item_userrepo_tv_update_at"
+        app:layout_constraintBottom_toBottomOf="@+id/item_userrepo_tv_update_at" />
 
     <View
         android:id="@+id/item_userrepo_view_separator"
+        android:layout_marginTop="@dimen/common_padding_large"
         style="@style/separator_hor_thin"
+        app:layout_constraintTop_toBottomOf="@+id/item_userrepo_tv_update_at"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 

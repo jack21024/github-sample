@@ -30,4 +30,35 @@
         <item name="android:background">@color/gs_gray_300</item>
     </style>
 
+    <!-- Text style -->
+
+    <style name="roboto_medium">
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="roboto">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="roboto_light">
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="roboto_thin">
+        <item name="android:fontFamily">sans-serif-thin</item>
+    </style>
+
+    <style name="lala_text_title_normal" parent="roboto_medium">
+        <item name="android:textSize">@dimen/text_normal</item>
+        <item name="android:textColor">@color/gs_gray_900</item>
+    </style>
+
+    <style name="lala_text_context_normal" parent="roboto_light">
+        <item name="android:textSize">@dimen/text_normal</item>
+    </style>
+
+    <style name="lala_text_context_small" parent="roboto_thin">
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textColor">@color/gs_gray_500</item>
+    </style>
 </resources>
