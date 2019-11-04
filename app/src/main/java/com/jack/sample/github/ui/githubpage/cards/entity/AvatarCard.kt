@@ -10,7 +10,7 @@ import com.jack.sample.github.ui.githubpage.GithubPageModel
 import com.jack.sample.github.R
 import com.jack.sample.github.model.User
 import com.jack.sample.github.ui.githubpage.cards.UsersAdapter
-import com.jack.sample.github.ui.githubpage.cards.viewholder.GithubCardViewHolderId
+import com.jack.sample.github.ui.githubpage.cards.viewholder.GithubCardViewId
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.list_item_user_avatar.view.*
 
@@ -33,7 +33,7 @@ class AvatarCard(
     private var avatarState: Parcelable? = null
 
     override val viewTypeId: Int =
-        GithubCardViewHolderId.VIEW_TYPE_USER_AVATAR
+        GithubCardViewId.VIEW_TYPE_USER_AVATAR
 
     override val layoutId: Int = R.layout.list_item_user_avatar
 

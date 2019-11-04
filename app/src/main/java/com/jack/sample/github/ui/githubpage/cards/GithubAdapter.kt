@@ -4,7 +4,7 @@ import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jack.sample.github.ui.githubpage.cards.entity.BaseViewHolder
-import com.jack.sample.github.ui.githubpage.cards.viewholder.GithubCardViewHolderId
+import com.jack.sample.github.ui.githubpage.cards.viewholder.GithubCardViewId
 import com.jack.sample.github.ui.githubpage.cards.interfaces.IGithubCard
 
 class GithubAdapter(
@@ -28,7 +28,7 @@ class GithubAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        return GithubCardViewHolderId.getViewHolderById(parent, viewType)
+        return GithubCardViewId.create(parent, viewType)
     }
 
     override fun getItemViewType(position: Int): Int {
