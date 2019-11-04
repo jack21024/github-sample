@@ -1,4 +1,4 @@
-package com.jack.sample.github.view.adapter
+package com.jack.sample.github.ui.githubpage.cards
 
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +14,9 @@ import com.jack.sample.github.R
 import com.jack.sample.github.model.User
 import kotlinx.android.synthetic.main.lsit_item_user_avatar_cell.view.*
 
-class UsersAdapter : PagedListAdapter<User, UsersAdapter.ViewHolder>(UserDiff) {
+class UsersAdapter : PagedListAdapter<User, UsersAdapter.ViewHolder>(
+    UserDiff
+) {
 
     var onClickListener: View.OnClickListener? = null
 

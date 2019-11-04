@@ -1,4 +1,4 @@
-package com.jack.sample.github.view.githubcard
+package com.jack.sample.github.ui.githubpage.cards.entity
 
 import android.os.Parcelable
 import android.util.Log
@@ -6,10 +6,11 @@ import android.view.View
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.jack.sample.github.MainViewModel
+import com.jack.sample.github.ui.githubpage.GithubPageModel
 import com.jack.sample.github.R
 import com.jack.sample.github.model.User
-import com.jack.sample.github.view.adapter.UsersAdapter
+import com.jack.sample.github.ui.githubpage.cards.UsersAdapter
+import com.jack.sample.github.ui.githubpage.cards.viewholder.GithubCardViewHolderId
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.list_item_user_avatar.view.*
 
@@ -17,7 +18,7 @@ class AvatarCard(
     datas: Observable<PagedList<User>>?
 ) : BaseCard() {
 
-    var viewModel: MainViewModel? = null
+    var viewModel: GithubPageModel? = null
 
     private var avatarLayoutManager: LinearLayoutManager? = null
         set(value) {
@@ -32,7 +33,7 @@ class AvatarCard(
     private var avatarState: Parcelable? = null
 
     override val viewTypeId: Int =
-        CardViewHolderId.VIEW_TYPE_USER_AVATAR
+        GithubCardViewHolderId.VIEW_TYPE_USER_AVATAR
 
     override val layoutId: Int = R.layout.list_item_user_avatar
 

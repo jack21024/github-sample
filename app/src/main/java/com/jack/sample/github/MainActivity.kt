@@ -8,16 +8,17 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jack.sample.github.databinding.ActivityMainBinding
 import androidx.lifecycle.ViewModelProviders
-import com.jack.sample.github.view.adapter.GitHubAdapter
-import com.jack.sample.github.view.githubcard.AvatarCard
-import com.jack.sample.github.view.githubcard.ICardView
-import com.jack.sample.github.view.githubcard.RepositoryCard
+import com.jack.sample.github.ui.githubpage.cards.GithubAdapter
+import com.jack.sample.github.ui.githubpage.cards.entity.AvatarCard
+import com.jack.sample.github.ui.githubpage.cards.entity.RepositoryCard
 import com.jack.sample.github.model.UserRepo
+import com.jack.sample.github.ui.githubpage.GithubPageModel
+import com.jack.sample.github.ui.githubpage.cards.interfaces.IGithubCard
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var _binding: ActivityMainBinding
-    private lateinit var _viewModel: MainViewModel
+    private lateinit var _viewModel: GithubPageModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initBinding() {
-        _viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        _viewModel = ViewModelProviders.of(this).get(GithubPageModel::class.java)
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         _binding.viewModel = _viewModel
         _binding.lifecycleOwner = this
@@ -37,19 +38,22 @@ class MainActivity : AppCompatActivity() {
         val githubCards = getGithubListCard()
 
         _binding.mainListUser.apply {
-            val githubAdapter = GitHubAdapter(githubCards)
+            val githubAdapter = GithubAdapter(githubCards)
             this.adapter = githubAdapter
             this.layoutManager = LinearLayoutManager(this@MainActivity)
             _viewModel.userRepoList.observe(this@MainActivity,  Observer<List<UserRepo>> { newRepos ->
 
                 Log.e("Card", "Main#userRepoList#observe list.size=${newRepos.size}")
-                val repoCards =newRepos.map { RepositoryCard(it) as ICardView }.toMutableList()
+                val repoCards =newRepos.map { RepositoryCard(
+                    it
+                ) as IGithubCard
+                }.toMutableList()
                 githubAdapter.updateRepositoryData(repoCards)
             })
         }
     }
 
-    private fun getGithubListCard() : MutableList<ICardView>{
+    private fun getGithubListCard() : MutableList<IGithubCard>{
         val avatarCard = AvatarCard(_viewModel.userList)
         avatarCard.viewModel = _viewModel
         return  mutableListOf(avatarCard)

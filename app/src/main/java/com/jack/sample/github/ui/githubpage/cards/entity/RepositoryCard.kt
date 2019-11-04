@@ -1,4 +1,4 @@
-package com.jack.sample.github.view.githubcard
+package com.jack.sample.github.ui.githubpage.cards.entity
 
 import android.view.View
 import android.widget.ImageView
@@ -6,15 +6,13 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.jack.sample.github.R
 import com.jack.sample.github.model.UserRepo
+import com.jack.sample.github.ui.githubpage.cards.viewholder.GithubCardViewHolderId
 import kotlinx.android.synthetic.main.list_item_user_repo.view.*
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.util.*
 
 class RepositoryCard(private val data: UserRepo?) : BaseCard() {
 
     override val viewTypeId: Int =
-        CardViewHolderId.VIEW_TYPE_USER_REPO
+        GithubCardViewHolderId.VIEW_TYPE_USER_REPO
     override val layoutId: Int = R.layout.list_item_user_repo
 
 

@@ -1,17 +1,17 @@
-package com.jack.sample.github.view.adapter
+package com.jack.sample.github.ui.githubpage.cards
 
 import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.jack.sample.github.view.githubcard.BaseViewHolder
-import com.jack.sample.github.view.githubcard.CardViewHolderId
-import com.jack.sample.github.view.githubcard.ICardView
+import com.jack.sample.github.ui.githubpage.cards.entity.BaseViewHolder
+import com.jack.sample.github.ui.githubpage.cards.viewholder.GithubCardViewHolderId
+import com.jack.sample.github.ui.githubpage.cards.interfaces.IGithubCard
 
-class GitHubAdapter(
-    private val cards: MutableList<ICardView>
+class GithubAdapter(
+    private val cards: MutableList<IGithubCard>
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
-    fun updateRepositoryData(newData: MutableList<ICardView>) {
+    fun updateRepositoryData(newData: MutableList<IGithubCard>) {
         removeExpiredRepositoryData()
         cards.addAll(newData)
         notifyItemRangeChanged(1, cards.lastIndex)
@@ -28,7 +28,7 @@ class GitHubAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        return CardViewHolderId.getViewHolderById(parent, viewType)
+        return GithubCardViewHolderId.getViewHolderById(parent, viewType)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -45,7 +45,7 @@ class GitHubAdapter(
 
     override fun onViewRecycled(holder: BaseViewHolder) {
         super.onViewRecycled(holder)
-        Log.d("Card", "GitHubAdapter#onViewRecycled holder=${holder}")
+        Log.d("Card", "GithubAdapter#onViewRecycled holder=${holder}")
         val pos = holder.layoutPosition
         cards[pos].onViewRecycled(holder)
     }

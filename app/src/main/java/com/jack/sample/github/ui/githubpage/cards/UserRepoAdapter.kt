@@ -1,4 +1,4 @@
-package com.jack.sample.github.view.adapter
+package com.jack.sample.github.ui.githubpage.cards
 
 import android.view.LayoutInflater
 import android.view.View

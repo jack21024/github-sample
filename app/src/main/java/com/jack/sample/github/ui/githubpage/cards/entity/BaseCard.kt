@@ -1,12 +1,13 @@
-package com.jack.sample.github.view.githubcard
+package com.jack.sample.github.ui.githubpage.cards.entity
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.jack.sample.github.ui.githubpage.cards.interfaces.IGithubCard
 
 
-abstract class BaseCard : ICardView {
+abstract class BaseCard : IGithubCard {
 
     abstract val layoutId: Int
 
@@ -20,11 +21,5 @@ abstract class BaseCard : ICardView {
     override fun onViewRecycled(holder: BaseViewHolder) { }
 }
 
-interface ICardView {
-    val viewTypeId: Int
-    fun createViewHolder(parent: ViewGroup): BaseViewHolder
-    fun bindViewHolder(holder: BaseViewHolder)
-    fun onViewRecycled(holder: BaseViewHolder)
-}
 
 open class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

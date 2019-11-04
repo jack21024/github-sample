@@ -1,10 +1,12 @@
-package com.jack.sample.github.view.githubcard
+package com.jack.sample.github.ui.githubpage.cards.viewholder
 
-import android.content.Context
 import android.view.ViewGroup
+import com.jack.sample.github.ui.githubpage.cards.entity.AvatarCard
+import com.jack.sample.github.ui.githubpage.cards.entity.BaseViewHolder
+import com.jack.sample.github.ui.githubpage.cards.entity.RepositoryCard
 
 
-class CardViewHolderId {
+class GithubCardViewHolderId {
     companion object {
         const val VIEW_TYPE_USER_AVATAR = 1
         const val VIEW_TYPE_USER_REPO = 2
@@ -14,7 +16,8 @@ class CardViewHolderId {
                 VIEW_TYPE_USER_AVATAR -> return AvatarCard(
                     null
                 ).createViewHolder(parent)
-                else -> return RepositoryCard(null).createViewHolder(parent)
+                else -> return RepositoryCard(null)
+                    .createViewHolder(parent)
             }
         }
     }
