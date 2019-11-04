@@ -15,19 +15,19 @@
         <item name="android:layout_height">48dp</item>
         <item name="android:textSize">24dp</item>
         <item name="android:textStyle">italic|bold</item>
-        <item name="android:textColor">@color/gs_black_90</item>
+        <item name="android:textColor">@color/gs_gray_900</item>
         <item name="android:typeface">serif</item>
     </style>
 
     <style name="separator_hor">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0.6dp</item>
-        <item name="android:background">@color/gs_black_30</item>
+        <item name="android:layout_height">0.7dp</item>
+        <item name="android:background">@color/gs_gray_400</item>
     </style>
 
     <style name="separator_hor_thin" parent="separator_hor">
-        <item name="android:layout_height">0.5dp</item>
-        <item name="android:background">@color/gs_black_20</item>
+        <item name="android:layout_height">0.6dp</item>
+        <item name="android:background">@color/gs_gray_300</item>
     </style>
 
 </resources>

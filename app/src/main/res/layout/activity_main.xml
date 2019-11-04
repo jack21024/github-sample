@@ -43,7 +43,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gs_black_5"
+            android:background="@color/gs_gray_100"
             android:visibility="@{viewModel.loading? View.VISIBLE : View.GONE}">
 
             <ProgressBar

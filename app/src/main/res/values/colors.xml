@@ -4,10 +4,11 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="gs_black_90">#212121</color>
-    <color name="gs_black_30">#4D000000</color>
-    <color name="gs_black_20">#32000000</color>
-    <color name="gs_black_5">#0D000000</color>
+    <color name="gs_gray_900">#212121</color>
+    <color name="gs_gray_500">#9E9E9E</color>
+    <color name="gs_gray_400">#BDBDBD</color>
+    <color name="gs_gray_300">#E0E0E0</color>
+    <color name="gs_gray_100">#F5F5F5</color>
 
-    <color name="gs_gray">#E0E0E0</color>
+    <color name="gs_yellow">#FFEB3B</color>>
 </resources>
