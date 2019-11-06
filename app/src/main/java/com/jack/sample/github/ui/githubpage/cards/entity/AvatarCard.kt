@@ -1,7 +1,6 @@
 package com.jack.sample.github.ui.githubpage.cards.entity
 
 import android.os.Parcelable
-import android.util.Log
 import android.view.View
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +12,7 @@ import com.jack.sample.github.ui.githubpage.cards.UsersAdapter
 import com.jack.sample.github.ui.githubpage.cards.viewholder.GithubCardViewId
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.list_item_user_avatar.view.*
+import timber.log.Timber
 
 class AvatarCard(
     datas: Observable<PagedList<User>>?
@@ -39,7 +39,6 @@ class AvatarCard(
 
     init {
         datas?.subscribe {
-            Log.d("Card", "AvatarCard#bindViewHolder#datas.subscribe userList.size=${it.size}")
             avatarAdapter.submitList(it)
         }
     }
@@ -49,7 +48,7 @@ class AvatarCard(
     }
 
     override fun bindViewHolder(holder: BaseViewHolder) {
-        Log.e("Card", "AvatarCard#bindViewHolder#IN")
+        Timber.d("bind avatars.")
 
         if (holder is ViewHolder) {
             val context = holder.itemView.context
@@ -61,7 +60,7 @@ class AvatarCard(
                     val pos = this.getChildAdapterPosition(view)
                     val item = avatarAdapter.currentList?.get(pos)
 
-                    Log.i("Card", "AvatarCard#click pos=$pos login=${item!!.login}")
+                    Timber.d("load repositories with login ${item!!.login}.")
 
                     item?.run { viewModel?.queryUserRepoList(this.login) }
                 }
@@ -78,14 +77,12 @@ class AvatarCard(
 
     private fun saveAvatarState() {
         avatarLayoutManager?.let {
-            Log.d("Card", "AvatarCard#saveAvatarState")
             avatarState = it.onSaveInstanceState()
         }
     }
 
     private fun restoreAvatarState(layoutManager: LinearLayoutManager?) {
         avatarState?.let {
-            Log.d("Card", "AvatarCard#restoreAvatarState")
             layoutManager?.onRestoreInstanceState(it)
         }
     }

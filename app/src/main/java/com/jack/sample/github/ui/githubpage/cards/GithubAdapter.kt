@@ -1,6 +1,5 @@
 package com.jack.sample.github.ui.githubpage.cards
 
-import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jack.sample.github.ui.githubpage.cards.entity.BaseViewHolder
@@ -45,7 +44,6 @@ class GithubAdapter(
 
     override fun onViewRecycled(holder: BaseViewHolder) {
         super.onViewRecycled(holder)
-        Log.d("Card", "GithubAdapter#onViewRecycled holder=${holder}")
         val pos = holder.layoutPosition
         cards[pos].onViewRecycled(holder)
     }

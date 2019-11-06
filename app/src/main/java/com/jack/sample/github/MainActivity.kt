@@ -2,7 +2,6 @@ package com.jack.sample.github
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,8 +41,6 @@ class MainActivity : AppCompatActivity() {
             this.adapter = githubAdapter
             this.layoutManager = LinearLayoutManager(this@MainActivity)
             _viewModel.userRepoList.observe(this@MainActivity,  Observer<List<UserRepo>> { newRepos ->
-
-                Log.e("Card", "Main#userRepoList#observe list.size=${newRepos.size}")
                 val repoCards =newRepos.map { RepositoryCard(
                     it
                 ) as IGithubCard

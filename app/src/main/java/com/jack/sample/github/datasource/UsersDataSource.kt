@@ -1,7 +1,6 @@
 package com.jack.sample.github.datasource
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
 import com.jack.sample.github.api.GithubPageLinks
@@ -10,6 +9,7 @@ import com.jack.sample.github.api.GithubServiceManager
 import com.jack.sample.github.model.User
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Response
+import timber.log.Timber
 
 
 class UsersDataSourceFactory : DataSource.Factory<String, User>() {
@@ -40,7 +40,7 @@ class UsersDataSource : PageKeyedDataSource<String, User>() {
                 val userPage = handleResponse(response)!!
                 callback.onResult(userPage.users, null, userPage.nextUrl)
             }, {
-                Log.d("${UsersDataSource::class}", "loadInitial#error")
+                Timber.e(it)
             })
     }
 
@@ -53,7 +53,7 @@ class UsersDataSource : PageKeyedDataSource<String, User>() {
                 val userPage = handleResponse(response)!!
                 callback.onResult(userPage.users, userPage.nextUrl)
             }, {
-                Log.d("${UsersDataSource::class}", "loadAfter#error")
+                Timber.e(it)
             })
 
     }
