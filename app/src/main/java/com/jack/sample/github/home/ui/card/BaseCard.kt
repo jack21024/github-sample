@@ -6,11 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 
-abstract class BaseCard : IGithubCard {
+abstract class BaseCard<T> : IGithubCard {
 
     abstract val layoutId: Int
 
     abstract fun getViewHolder(view: View): BaseViewHolder
+
+    open fun update(data: T) = Unit
 
     override fun createViewHolder(parent: ViewGroup): BaseViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)

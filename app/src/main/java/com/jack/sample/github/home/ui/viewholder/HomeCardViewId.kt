@@ -17,15 +17,15 @@ class HomeCardViewId {
                 else -> RepoCard::class
             }
 
-            return createImpl(parent, cardClazz)
+            return createImpl(parent, cardClazz as KClass<out BaseCard<in Any>>)
         }
 
-        private fun createImpl(parent: ViewGroup, kClazz: KClass<out BaseCard>) : BaseViewHolder {
+        private fun createImpl(parent: ViewGroup, kClazz: KClass<out BaseCard<in Any>>) : BaseViewHolder {
             val cardInstance = createDummyCard(kClazz)
             return cardInstance.createViewHolder(parent)
         }
 
-        private fun createDummyCard(kClazz: KClass<out BaseCard>): BaseCard {
+        private fun createDummyCard(kClazz: KClass<out BaseCard<in Any>>): BaseCard<in Any> {
             val ctor = kClazz.primaryConstructor
             val instance = ctor?.let {
                 when(it.parameters.size) {

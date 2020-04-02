@@ -3,17 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <import type="android.view.View" />
-        <variable
-            name="viewModel"
-            type="com.jack.sample.github.home.ui.viewmodel.HomeViewModel" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".home.HomeActivity">
 
         <TextView
             android:id="@+id/main_text_users"
@@ -41,14 +34,13 @@
             />
 
         <FrameLayout
+            android:id="@+id/main_progress"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/gs_gray_100"
-            android:visibility="@{viewModel.loading? View.VISIBLE : View.GONE}"
             tools:background="@android:color/transparent" >
 
             <ProgressBar
-                android:id="@+id/main_progress_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" />

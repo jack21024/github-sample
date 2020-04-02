@@ -3,7 +3,7 @@ package com.jack.sample.github.home.ui.card
 import android.view.View
 import com.jack.sample.github.R
 
-class NullCard : BaseCard() {
+class NullCard : BaseCard<Any>() {
 
     override val layoutId: Int = R.layout.list_item_null
 

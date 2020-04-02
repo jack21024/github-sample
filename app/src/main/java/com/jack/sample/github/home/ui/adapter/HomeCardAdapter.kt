@@ -6,9 +6,16 @@ import com.jack.sample.github.home.ui.card.BaseViewHolder
 import com.jack.sample.github.home.ui.viewholder.HomeCardViewId
 import com.jack.sample.github.home.ui.card.IGithubCard
 
-class HomeAdapter(
+class HomeCardAdapter(
     private val cards: MutableList<IGithubCard>
 ) : RecyclerView.Adapter<BaseViewHolder>() {
+
+    fun getItem(index: Int): IGithubCard? =
+        if (itemCount > 0) {
+            cards[index]
+        } else {
+            null
+        }
 
     fun updateRepositoryData(newData: MutableList<IGithubCard>) {
         removeExpiredRepositoryData()

@@ -9,7 +9,7 @@ import com.jack.sample.github.home.data.entity.UserRepo
 import com.jack.sample.github.home.ui.viewholder.HomeCardViewId
 import kotlinx.android.synthetic.main.list_item_user_repo.view.*
 
-class RepoCard(private val data: UserRepo?) : BaseCard() {
+class RepoCard(private val data: UserRepo?) : BaseCard<Any>() {
 
     override val viewTypeId: Int =
         HomeCardViewId.VIEW_TYPE_USER_REPO

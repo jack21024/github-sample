@@ -17,17 +17,19 @@ class HomeViewModel : ViewModel() {
 
     private val usersRepo by lazy { UserRepository() }
 
-    val loading: ObservableBoolean = ObservableBoolean(false)
+    val loading = MutableLiveData<Boolean>()
 
     val userList = createUserListObservable()
 
     val userRepoList = MutableLiveData<BaseRepoData<UserRepoViewData>>()
 
 
+    init {
+        loading.value = false
+    }
 
     private fun createUserListObservable(): LiveData<PagedList<User>>? {
         return usersRepo.getUsers()
-
     }
 //    private fun createUserListObservable(): Observable<PagedList<User>> {
 //        return usersRepo.getUsers().concatMap {

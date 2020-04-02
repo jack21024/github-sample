@@ -14,9 +14,7 @@ import com.jack.sample.github.home.ui.viewholder.HomeCardViewId
 import kotlinx.android.synthetic.main.list_item_user_avatar.view.*
 import timber.log.Timber
 
-class AvatarCard(
-    datas: LiveData<PagedList<User>>?
-) : BaseCard() {
+class AvatarCard : BaseCard<PagedList<User>>() {
 
     var viewModel: HomeViewModel? = null
 
@@ -37,13 +35,8 @@ class AvatarCard(
 
     override val layoutId: Int = R.layout.list_item_user_avatar
 
-    init {
-//        datas?.subscribe {
-//            avatarAdapter.submitList(it)
-//        }
-    }
 
-    fun update(data: PagedList<User>) {
+    override fun update(data: PagedList<User>) {
         avatarAdapter.submitList(data)
     }
 
