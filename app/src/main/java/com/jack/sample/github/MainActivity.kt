@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.jack.sample.github.ui.githubpage.cards.GithubAdapter
 import com.jack.sample.github.ui.githubpage.cards.entity.AvatarCard
 import com.jack.sample.github.ui.githubpage.cards.entity.RepositoryCard
-import com.jack.sample.github.model.UserRepo
 import com.jack.sample.github.ui.githubpage.GithubPageModel
 import com.jack.sample.github.ui.githubpage.cards.interfaces.IGithubCard
 
@@ -40,12 +39,14 @@ class MainActivity : AppCompatActivity() {
             val githubAdapter = GithubAdapter(githubCards)
             this.adapter = githubAdapter
             this.layoutManager = LinearLayoutManager(this@MainActivity)
-            _viewModel.userRepoList.observe(this@MainActivity,  Observer<List<UserRepo>> { newRepos ->
-                val repoCards =newRepos.map { RepositoryCard(
+            _viewModel.userRepoList.observe(this@MainActivity, Observer {
+                val repoCards =it.viewData.value?.userRepoList?.map { RepositoryCard(
                     it
                 ) as IGithubCard
-                }.toMutableList()
-                githubAdapter.updateRepositoryData(repoCards)
+                }?.toMutableList()
+                repoCards?.let {
+                    githubAdapter.updateRepositoryData(repoCards)
+                }
             })
         }
     }
@@ -53,6 +54,9 @@ class MainActivity : AppCompatActivity() {
     private fun getGithubCard() : MutableList<IGithubCard>{
         val avatarCard = AvatarCard(_viewModel.userList)
         avatarCard.viewModel = _viewModel
+        _viewModel.userList?.observe(this, Observer {
+            avatarCard.update(it)
+        })
         return  mutableListOf(avatarCard)
     }
 

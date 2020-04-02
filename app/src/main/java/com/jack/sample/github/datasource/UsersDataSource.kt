@@ -4,12 +4,10 @@ import android.annotation.SuppressLint
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
 import com.jack.sample.github.api.GithubPageLinks
-import com.jack.sample.github.api.GithubService
-import com.jack.sample.github.api.GithubServiceManager
+import com.jack.sample.github.api.UserListApi
 import com.jack.sample.github.model.User
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.*
 import retrofit2.Response
-import timber.log.Timber
 
 
 class UsersDataSourceFactory : DataSource.Factory<String, User>() {
@@ -18,7 +16,7 @@ class UsersDataSourceFactory : DataSource.Factory<String, User>() {
     }
 }
 
-class UsersDataSource : PageKeyedDataSource<String, User>() {
+class UsersDataSource : PageKeyedDataSource<String, User>(), CoroutineScope by MainScope() {
 
     private data class UserPage(val users: List<User>, val nextUrl: String)
 
@@ -27,34 +25,40 @@ class UsersDataSource : PageKeyedDataSource<String, User>() {
         private const val PER_PAGE = 20
     }
 
-    private val service: GithubService = GithubServiceManager.SERVICE
+
+    val job = Job()
+    val scope = CoroutineScope(Dispatchers.IO + job)
 
     @SuppressLint("CheckResult")
     override fun loadInitial(
         params: LoadInitialParams<String>,
         callback: LoadInitialCallback<String, User>
     ) {
-        service.getUsers(INITIAL_PAGE, PER_PAGE)
-            .subscribeOn(Schedulers.io())
-            .subscribe({ response ->
-                val userPage = handleResponse(response)!!
-                callback.onResult(userPage.users, null, userPage.nextUrl)
-            }, {
-                Timber.e(it)
-            })
+        launch {
+            UserListApi()
+                .setRange(INITIAL_PAGE, PER_PAGE)
+                .startWithResponse().run {
+                    this.result?.let {
+                        val userPage = handleResponse(it)!!
+                        callback.onResult(userPage.users, null, userPage.nextUrl)
+                    }
+                }
+        }
     }
 
     @SuppressLint("CheckResult")
     override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<String, User>) {
-        val url = params.key
-        service.getUsers(url)
-            .subscribeOn(Schedulers.io())
-            .subscribe({response ->
-                val userPage = handleResponse(response)!!
-                callback.onResult(userPage.users, userPage.nextUrl)
-            }, {
-                Timber.e(it)
-            })
+        launch {
+            val url = params.key
+            UserListApi()
+                .setNextUrl(url)
+                .startWithResponse().run {
+                    this.result?.let {
+                        val userPage = handleResponse(it)!!
+                        callback.onResult(userPage.users, userPage.nextUrl)
+                    }
+                }
+        }
 
     }
 

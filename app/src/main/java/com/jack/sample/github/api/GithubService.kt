@@ -3,9 +3,6 @@ package com.jack.sample.github.api
 import com.jack.sample.github.model.User
 import com.jack.sample.github.model.UserIntro
 import com.jack.sample.github.model.UserRepo
-import io.reactivex.Observable
-import io.reactivex.Single
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -27,29 +24,29 @@ interface GithubService {
     }
 
     @GET("/users")
-    fun getUsers(
+    suspend fun getUsers(
         @Query("since") since: Int,
         @Query("per_page") perPage: Int
-    ): Single<Response<List<User>>>
+    ): Response<List<User>>
 
     @GET
-    fun getUsers (
+    suspend fun getUsers (
         @Url url: String
-    ): Single<Response<List<User>>>
+    ): Response<List<User>>
 
-    @GET("/users/{username}")
-    fun getUserIntro (
-        @Path(value = "username") username: String
-    ): Single<UserIntro>
+//    @GET("/users/{username}")
+//    fun getUserIntro (
+//        @Path(value = "username") username: String
+//    ): Single<UserIntro>
 
     @GET("/users/{user}/repos")
-    fun getUserRepos(
+    suspend fun getUserRepos(
         @Path("user") user: String
-    ): Single<List<UserRepo>>
+    ): Response<List<UserRepo>>
 
-    @GET("/search/users")
-    fun searchUsers(
-        @Query("q") q: String
-    ): Observable<List<User>>
+//    @GET("/search/users")
+//    fun searchUsers(
+//        @Query("q") q: String
+//    ): Observable<List<User>>
 
 }

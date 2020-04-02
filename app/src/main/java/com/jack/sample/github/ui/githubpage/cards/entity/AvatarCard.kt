@@ -2,6 +2,7 @@ package com.jack.sample.github.ui.githubpage.cards.entity
 
 import android.os.Parcelable
 import android.view.View
+import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,12 +11,11 @@ import com.jack.sample.github.R
 import com.jack.sample.github.model.User
 import com.jack.sample.github.ui.githubpage.cards.UsersAdapter
 import com.jack.sample.github.ui.githubpage.cards.viewholder.GithubCardViewId
-import io.reactivex.Observable
 import kotlinx.android.synthetic.main.list_item_user_avatar.view.*
 import timber.log.Timber
 
 class AvatarCard(
-    datas: Observable<PagedList<User>>?
+    datas: LiveData<PagedList<User>>?
 ) : BaseCard() {
 
     var viewModel: GithubPageModel? = null
@@ -38,10 +38,15 @@ class AvatarCard(
     override val layoutId: Int = R.layout.list_item_user_avatar
 
     init {
-        datas?.subscribe {
-            avatarAdapter.submitList(it)
-        }
+//        datas?.subscribe {
+//            avatarAdapter.submitList(it)
+//        }
     }
+
+    fun update(data: PagedList<User>) {
+        avatarAdapter.submitList(data)
+    }
+
 
     override fun getViewHolder(view: View): BaseViewHolder {
         return ViewHolder(view)
@@ -62,7 +67,7 @@ class AvatarCard(
 
                     Timber.d("load repositories with login ${item!!.login}.")
 
-                    item?.run { viewModel?.queryUserRepoList(this.login) }
+                    item?.run { viewModel?.getUserRepoList(this.login) }
                 }
                 this.adapter = avatarAdapter
                 this.layoutManager = avatarLayoutManager

@@ -1,19 +1,18 @@
 package com.jack.sample.github.repository
 
-import com.jack.sample.github.api.GithubServiceManager
-import com.jack.sample.github.model.UserRepo
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.jack.sample.github.base.repository.BaseRepoData
+import com.jack.sample.github.datasource.UserRepoRemoteDateSource
 
-class UserRepoRepository {
+class UserRepoRepository(private val remoteDataSource: UserRepoRemoteDateSource) {
 
-    fun getRepository(username: String): Observable<List<UserRepo>> {
-        return GithubServiceManager.SERVICE
-            .getUserRepos(username)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .toObservable()
+    suspend fun getUserRepoList(userName: String): BaseRepoData<UserRepoViewData> {
+        return BaseRepoData<UserRepoViewData>().apply {
+            remoteDataSource.getUserRepoList(userName).run {
+                this.result?.let { data ->
+                    viewData.value = (UserRepoViewData(data))
+                }
+            }
+        }
     }
 
 }
