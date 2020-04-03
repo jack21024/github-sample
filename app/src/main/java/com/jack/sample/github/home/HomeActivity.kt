@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.paging.PagedList
 import com.jack.sample.github.R
 import com.jack.sample.github.home.ui.card.RepoCard
 import com.jack.sample.github.home.ui.viewmodel.HomeViewModel
 import com.jack.sample.github.home.ui.card.IGithubCard
 import com.jack.sample.github.home.viewcontroller.HomeCardViewController
 import kotlinx.android.synthetic.main.activity_main.*
+import timber.log.Timber
 
 class HomeActivity : AppCompatActivity() {
 
@@ -44,6 +46,23 @@ class HomeActivity : AppCompatActivity() {
         })
 
         _viewModel.userList?.observe(this, Observer {
+            it.addWeakCallback(it, object : PagedList.Callback() {
+                override fun onInserted(position: Int, count: Int) {
+                    it.removeWeakCallback(this)
+                    if (count > 0) {
+                        Timber.d("users is fetched at first, load repositories.")
+                        it.first().let { user ->
+                            _viewModel.getUserRepoList(user.login)
+                        }
+                    } else {
+                        Timber.e("fetch users failed.")
+                    }
+                }
+
+                override fun onChanged(position: Int, count: Int) {}
+                override fun onRemoved(position: Int, count: Int) {}
+
+            })
             homeViewController.updateAvatar(it)
         })
 
