@@ -1,12 +1,11 @@
 package com.jack.sample.github.home.api
 
 import com.jack.sample.github.net.GithubService
-import com.jack.sample.github.net.GithubServiceManager
 import com.jack.sample.github.base.network.BaseApi
 import com.jack.sample.github.home.data.entity.UserRepo
 import retrofit2.Response
 
-class UserRepoApi : BaseApi<GithubService, List<UserRepo>>(GithubServiceManager.SERVICE) {
+class UserRepoApi : BaseApi<GithubService, List<UserRepo>>(GithubService.getInstance()) {
 
     private var userName: String = ""
 
@@ -14,7 +13,6 @@ class UserRepoApi : BaseApi<GithubService, List<UserRepo>>(GithubServiceManager.
         this.userName = userName
     }
 
-    override suspend fun getResponse(): Response<List<UserRepo>>
-            = service.getUserRepos(userName)
+    override suspend fun getResponse(): Response<List<UserRepo>> = service.getUserRepos(userName)
 
 }
