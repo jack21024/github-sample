@@ -8,7 +8,7 @@ class UserRepoRepository(private val remoteDataSource: UserRepoRemoteDateSource)
         return BaseRepoData<UserRepoViewData>().apply {
             remoteDataSource.getUserRepoList(userName).run {
                 this.result?.let { data ->
-                    viewData.value = (UserRepoViewData(data))
+                    viewData.postValue(UserRepoViewData(data))
                 }
             }
         }

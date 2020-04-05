@@ -6,33 +6,26 @@ import androidx.paging.PageKeyedDataSource
 import com.jack.sample.github.net.GithubPageLinks
 import com.jack.sample.github.home.api.UserListApi
 import com.jack.sample.github.home.data.entity.User
+import com.jack.sample.github.recyclerview.card.enums.CardType
+import com.jack.sample.github.recyclerview.card.item.CardItem
 import kotlinx.coroutines.*
 import retrofit2.Response
 
 
-class UsersDataSourceFactory : DataSource.Factory<String, User>() {
-    override fun create(): DataSource<String, User> {
+class UsersDataSourceFactory : DataSource.Factory<String, CardItem>() {
+    override fun create(): DataSource<String, CardItem> {
         return UsersDataSource()
     }
 }
 
-class UsersDataSource : PageKeyedDataSource<String, User>(), CoroutineScope by MainScope() {
+class UsersDataSource : PageKeyedDataSource<String, CardItem>(), CoroutineScope by MainScope() {
 
-    private data class UserPage(val users: List<User>, val nextUrl: String)
-
-    companion object {
-        private const val INITIAL_PAGE = 0
-        private const val PER_PAGE = 20
-    }
-
-
-    val job = Job()
-    val scope = CoroutineScope(Dispatchers.IO + job)
+    private data class UserPage(val users: List<CardItem>, val nextUrl: String)
 
     @SuppressLint("CheckResult")
     override fun loadInitial(
         params: LoadInitialParams<String>,
-        callback: LoadInitialCallback<String, User>
+        callback: LoadInitialCallback<String, CardItem>
     ) {
         launch {
             UserListApi()
@@ -50,7 +43,7 @@ class UsersDataSource : PageKeyedDataSource<String, User>(), CoroutineScope by M
     }
 
     @SuppressLint("CheckResult")
-    override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<String, User>) {
+    override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<String, CardItem>) {
         launch {
             val url = params.key
             UserListApi()
@@ -65,13 +58,15 @@ class UsersDataSource : PageKeyedDataSource<String, User>(), CoroutineScope by M
 
     }
 
-    override fun loadBefore(params: LoadParams<String>, callback: LoadCallback<String, User>) {}
+    override fun loadBefore(params: LoadParams<String>, callback: LoadCallback<String, CardItem>) {}
 
     private fun handleResponse(response: Response<List<User>>): UserPage? {
         if (response.isSuccessful) {
             response.body()?.run {
                 return UserPage(
-                    this,
+                    this.map {
+                        CardItem(it.id.hashCode(), CardType.AVATAR, it)
+                    },
                     GithubPageLinks.getNext(response.headers())
                 )
             }
@@ -79,4 +74,8 @@ class UsersDataSource : PageKeyedDataSource<String, User>(), CoroutineScope by M
         return null
     }
 
+    companion object {
+        private const val INITIAL_PAGE = 0
+        private const val PER_PAGE = 20
+    }
 }

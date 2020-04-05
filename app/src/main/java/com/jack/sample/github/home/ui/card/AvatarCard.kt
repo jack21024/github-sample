@@ -2,15 +2,14 @@ package com.jack.sample.github.home.ui.card
 
 import android.os.Parcelable
 import android.view.View
-import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.jack.sample.github.home.ui.viewmodel.HomeViewModel
 import com.jack.sample.github.R
 import com.jack.sample.github.home.data.entity.User
 import com.jack.sample.github.home.ui.adapter.UsersAdapter
 import com.jack.sample.github.home.ui.viewholder.HomeCardViewId
+import com.jack.sample.github.home.ui.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.list_item_user_avatar.view.*
 import timber.log.Timber
 
