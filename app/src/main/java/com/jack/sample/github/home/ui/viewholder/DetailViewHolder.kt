@@ -1,4 +1,4 @@
-package com.jack.sample.github.detail.ui.viewholder
+package com.jack.sample.github.home.ui.viewholder
 
 import android.view.View
 import android.view.ViewGroup

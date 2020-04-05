@@ -7,7 +7,7 @@ import com.jack.sample.github.base.recyclerview.item.BaseCardItem
 import com.jack.sample.github.recyclerview.row.enums.CardRowType
 import com.jack.sample.github.recyclerview.row.item.CardRowItem
 import com.jack.sample.github.base.recyclerview.viewholder.BaseViewHolder
-import com.jack.sample.github.detail.ui.viewholder.DetailViewHolder
+import com.jack.sample.github.home.ui.viewholder.DetailViewHolder
 import com.jack.sample.github.home.ui.viewholder.UserRepoViewHolder
 import com.jack.sample.github.recyclerview.row.viewholder.PagedCardViewHolder
 
