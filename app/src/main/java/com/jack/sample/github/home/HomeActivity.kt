@@ -13,6 +13,7 @@ import com.jack.sample.github.recyclerview.card.enums.CardType
 import com.jack.sample.github.recyclerview.card.item.CardItem
 import com.jack.sample.github.recyclerview.row.enums.CardRowType
 import com.jack.sample.github.recyclerview.row.item.CardRowItem
+import com.jack.sample.github.recyclerview.row.item.DetailRowItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 class HomeActivity : AppCompatActivity() {
@@ -33,7 +34,11 @@ class HomeActivity : AppCompatActivity() {
                 is CardRowItem -> {
                     when (item.type) {
                         CardRowType.DETAIL -> {
-                            Toast.makeText(this, "See profile.", Toast.LENGTH_LONG).show()
+                            Toast.makeText(
+                                this,
+                                "See ${(item as DetailRowItem).userName} profile.",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                         else -> {
                             Toast.makeText(this, "${item} clicked.", Toast.LENGTH_LONG).show()

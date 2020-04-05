@@ -3,12 +3,9 @@ package com.jack.sample.github.home.ui.viewmodel
 import androidx.lifecycle.*
 import androidx.paging.PagedList
 import com.jack.sample.github.home.data.repository.UserRepoRemoteDateSource
-import com.jack.sample.github.base.repository.BaseRepoData
 import com.jack.sample.github.home.data.HomeViewData
 import com.jack.sample.github.home.data.entity.User
-import com.jack.sample.github.home.data.entity.UserRepo
 import com.jack.sample.github.home.data.repository.UserRepoRepository
-import com.jack.sample.github.home.data.repository.UserRepoViewData
 import com.jack.sample.github.home.data.repository.UserRepository
 import com.jack.sample.github.recyclerview.card.item.CardItem
 import com.jack.sample.github.recyclerview.row.item.CardRowItem
@@ -16,7 +13,6 @@ import com.jack.sample.github.recyclerview.row.item.DetailRowItem
 import com.jack.sample.github.recyclerview.row.item.PagedCardRowItem
 import com.jack.sample.github.recyclerview.row.item.RepoRowItem
 import kotlinx.coroutines.*
-import timber.log.Timber
 
 class HomeViewModel : ViewModel(), CoroutineScope by MainScope() {
 
@@ -27,20 +23,7 @@ class HomeViewModel : ViewModel(), CoroutineScope by MainScope() {
 
     val homeViewData = MutableLiveData<HomeViewData>()
 
-    private val _userRepoList = MutableLiveData<BaseRepoData<UserRepoViewData>>()
-    val userRepoList: LiveData<List<UserRepo>> = Transformations.map(_userRepoList) {
-        it.viewData.value?.userRepoList
-    }
-    val userRepoRowData: LiveData<List<CardRowItem>> = Transformations.map(userRepoList) {
-        ArrayList<CardRowItem>().apply {
-            add(DetailRowItem())
-            it?.map { repo ->
-                RepoRowItem(repo)
-            }?.let {
-                addAll(it)
-            }
-        }
-    }
+    val userRepoRowData = MutableLiveData<List<CardRowItem>>()
 
 
     init {
@@ -50,7 +33,20 @@ class HomeViewModel : ViewModel(), CoroutineScope by MainScope() {
     fun getUserRepoList(userName: String) {
         MainScope().launch {
             userRepoRepository.getUserRepoList(userName).let {
-                _userRepoList.postValue(it)
+                delay(1) // workaround to fix livedata get null value event it's post
+
+                it.viewData.value?.userRepoList.let {
+                    userRepoRowData.postValue(
+                        ArrayList<CardRowItem>().apply {
+                            add(DetailRowItem(userName))
+                            it?.map { repo ->
+                                RepoRowItem(repo)
+                            }?.let {
+                                addAll(it)
+                            }
+                        }
+                    )
+                }
             }
         }
     }
