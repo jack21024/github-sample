@@ -61,4 +61,21 @@
         <item name="android:textSize">@dimen/text_small</item>
         <item name="android:textColor">@color/gs_gray_500</item>
     </style>
+
+    <style name="icon_normal">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:padding">15dp</item>
+    </style>
+
+    <style name="badge_normal">
+        <item name="android:paddingTop">1dp</item>
+        <item name="android:paddingBottom">1dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/gs_white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/bg_orvl_badge</item>
+    </style>
 </resources>

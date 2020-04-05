@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/view_user_info_guide_line_vertical_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/view_user_info_guide_line_horizontal_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/view_user_info_guide_line_horizontal_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/view_user_info_guide_line_vertical_margin" />
+
+    <ImageView
+        android:id="@+id/image_user_pic"
+        style="@style/icon_normal"
+        android:src="@drawable/ic_person_24px"
+        app:layout_constraintBottom_toBottomOf="@id/guide_line_bottom"
+        app:layout_constraintLeft_toLeftOf="@+id/guide_line_left"
+        app:layout_constraintTop_toTopOf="@id/guide_line_top" />
+
+    <TextView
+        android:id="@+id/text_login"
+        style="@style/lala_text_title_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/view_user_info_pic_text_margin"
+        android:ellipsize="end"
+        android:maxWidth="200dp"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@id/text_badge"
+        app:layout_constraintLeft_toRightOf="@id/image_user_pic"
+        app:layout_constraintTop_toTopOf="@id/image_user_pic"
+        tools:text="defunkt" />
+
+    <TextView
+        android:id="@+id/text_badge"
+        style="@style/badge_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/user_info_badge_staff"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/image_user_pic"
+        app:layout_constraintLeft_toLeftOf="@id/text_login"
+        app:layout_constraintTop_toBottomOf="@id/text_login"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

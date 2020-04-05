@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".detail.TestDetailActivity" android:exported="true" />
+        <activity android:name=".detail.DetailActivity" android:exported="true" />
     </application>
 
 </manifest>

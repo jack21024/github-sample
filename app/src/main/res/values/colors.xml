@@ -14,5 +14,7 @@
 
     <color name="gs_yellow">#FFEB3B</color>
 
+    <color name="gs_blue_900">#01579B</color>
+    <color name="gs_blue_600">#039BE5</color>
     <color name="gs_blue_200">#81D4FA</color>
 </resources>
