@@ -16,18 +16,6 @@
         android:layout_gravity="center"
         tools:background="@drawable/placeholder_circle_gray_72" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/item_user_avatar_cell_login3"-->
-<!--        style="@style/gs_text_title_normal"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="4dp"-->
-<!--        android:ellipsize="end"-->
-<!--        android:singleLine="true"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textSize="14dp"-->
-<!--        tools:text="github_login" />-->
-
     <TextView
         android:id="@+id/item_user_avatar_cell_login"
         style="@style/lala_text_context_normal"
@@ -39,17 +27,5 @@
         android:textAlignment="center"
         android:textSize="14dp"
         tools:text="github_login" />
-
-<!--    <TextView-->
-<!--        android:id="@+id/item_user_avatar_cell_login2"-->
-<!--        style="@style/gs_text_context_small"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="4dp"-->
-<!--        android:ellipsize="end"-->
-<!--        android:singleLine="true"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textSize="14dp"-->
-<!--        tools:text="github_login" />-->
 
 </LinearLayout>
