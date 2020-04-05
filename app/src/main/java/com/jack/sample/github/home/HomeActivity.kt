@@ -11,13 +11,14 @@ import com.jack.sample.github.home.ui.viewmodel.HomeViewModel
 import com.jack.sample.github.home.ui.viewcontroller.HomeViewController
 import com.jack.sample.github.recyclerview.card.enums.CardType
 import com.jack.sample.github.recyclerview.card.item.CardItem
+import com.jack.sample.github.recyclerview.row.enums.CardRowType
 import com.jack.sample.github.recyclerview.row.item.CardRowItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var _viewModel: HomeViewModel
-
+    private lateinit var homeViewController: HomeViewController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,15 +27,21 @@ class HomeActivity : AppCompatActivity() {
         initViewModel()
     }
 
-    lateinit var homeViewController: HomeViewController
     private fun initViewController() {
         homeViewController = HomeViewController(main_list_user) { item, _ ->
-            when(item) {
+            when (item) {
                 is CardRowItem -> {
-                    Toast.makeText(this, "${item} clicked.", Toast.LENGTH_LONG).show()
+                    when (item.type) {
+                        CardRowType.DETAIL -> {
+                            Toast.makeText(this, "See profile.", Toast.LENGTH_LONG).show()
+                        }
+                        else -> {
+                            Toast.makeText(this, "${item} clicked.", Toast.LENGTH_LONG).show()
+                        }
+                    }
                 }
                 is CardItem -> {
-                    when(item.type) {
+                    when (item.type) {
                         CardType.AVATAR -> {
                             item.user?.let {
                                 _viewModel.getUserRepoList(it.login)
@@ -51,7 +58,7 @@ class HomeActivity : AppCompatActivity() {
 
         _viewModel.loading.observe(this, Observer { loading ->
             main_progress.apply {
-                visibility = if(loading) {
+                visibility = if (loading) {
                     View.VISIBLE
                 } else {
                     View.GONE

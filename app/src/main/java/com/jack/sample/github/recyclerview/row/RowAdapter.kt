@@ -7,6 +7,7 @@ import com.jack.sample.github.base.recyclerview.item.BaseCardItem
 import com.jack.sample.github.recyclerview.row.enums.CardRowType
 import com.jack.sample.github.recyclerview.row.item.CardRowItem
 import com.jack.sample.github.base.recyclerview.viewholder.BaseViewHolder
+import com.jack.sample.github.detail.ui.viewholder.DetailViewHolder
 import com.jack.sample.github.home.ui.viewholder.UserRepoViewHolder
 import com.jack.sample.github.recyclerview.row.viewholder.PagedCardViewHolder
 
@@ -16,11 +17,14 @@ class RowAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<CardRowItem> {
         return when(CardRowType.fromId(viewType)) {
+            CardRowType.PAGED_CARDS -> {
+                PagedCardViewHolder(parent, onCardClicked)
+            }
             CardRowType.USER_REPO -> {
                 UserRepoViewHolder(parent, onCardClicked)
             }
-            CardRowType.PAGED_CARDS -> {
-                PagedCardViewHolder(parent, onCardClicked)
+            CardRowType.DETAIL -> {
+                DetailViewHolder(parent, onCardClicked)
             }
         }
     }

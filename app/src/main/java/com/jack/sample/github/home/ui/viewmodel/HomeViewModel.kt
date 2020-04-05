@@ -12,6 +12,7 @@ import com.jack.sample.github.home.data.repository.UserRepoViewData
 import com.jack.sample.github.home.data.repository.UserRepository
 import com.jack.sample.github.recyclerview.card.item.CardItem
 import com.jack.sample.github.recyclerview.row.item.CardRowItem
+import com.jack.sample.github.recyclerview.row.item.DetailRowItem
 import com.jack.sample.github.recyclerview.row.item.PagedCardRowItem
 import com.jack.sample.github.recyclerview.row.item.RepoRowItem
 import kotlinx.coroutines.*
@@ -31,8 +32,13 @@ class HomeViewModel : ViewModel(), CoroutineScope by MainScope() {
         it.viewData.value?.userRepoList
     }
     val userRepoRowData: LiveData<List<CardRowItem>> = Transformations.map(userRepoList) {
-        it?.map { repo ->
-            RepoRowItem(repo)
+        ArrayList<CardRowItem>().apply {
+            add(DetailRowItem())
+            it?.map { repo ->
+                RepoRowItem(repo)
+            }?.let {
+                addAll(it)
+            }
         }
     }
 
@@ -58,27 +64,32 @@ class HomeViewModel : ViewModel(), CoroutineScope by MainScope() {
     }
 
     private val userLiveDataObserver = Observer<PagedList<CardItem>> {
-        it.addWeakCallback(it, object : PagedList.Callback() {
-            override fun onInserted(position: Int, count: Int) {
-                it.removeWeakCallback(this)
-                if (count > 0) {
-                    Timber.d("users is fetched at first, load repositories.")
-
-                    createHomeViewData(it)
-                } else {
-                    Timber.e("fetch users failed.")
-                }
-            }
-
-            override fun onChanged(position: Int, count: Int) {}
-            override fun onRemoved(position: Int, count: Int) {}
-
-        })
+//        it.addWeakCallback(it, object : PagedList.Callback() {
+//            override fun onInserted(position: Int, count: Int) {
+//                it.removeWeakCallback(this)
+//                if (count > 0) {
+//                    Timber.d("users is fetched at first, load repositories.")
+//
+//                    createHomeViewData(it)
+//                } else {
+//                    Timber.e("fetch users failed.")
+//                }
+//            }
+//
+//            override fun onChanged(position: Int, count: Int) {}
+//            override fun onRemoved(position: Int, count: Int) {}
+//
+//        })
+        createHomeViewData(it)
     }
 
     private fun createHomeViewData(userList: PagedList<CardItem>) {
         launch(Dispatchers.IO) {
-            val user = userList.first().user
+            var user = if(userList.isNotEmpty()) {
+                userList.first().user
+            } else {
+                null
+            }
             val cardRowList = ArrayList<CardRowItem>().apply {
                 add(PagedCardRowItem(userList))
                 user?.let {

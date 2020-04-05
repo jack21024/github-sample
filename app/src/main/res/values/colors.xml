@@ -4,11 +4,15 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
+    <color name="gs_white">#FFFFFF</color>
+
     <color name="gs_gray_900">#212121</color>
     <color name="gs_gray_500">#9E9E9E</color>
     <color name="gs_gray_400">#BDBDBD</color>
     <color name="gs_gray_300">#E0E0E0</color>
     <color name="gs_gray_100">#F5F5F5</color>
 
-    <color name="gs_yellow">#FFEB3B</color>>
+    <color name="gs_yellow">#FFEB3B</color>
+
+    <color name="gs_blue_200">#81D4FA</color>
 </resources>

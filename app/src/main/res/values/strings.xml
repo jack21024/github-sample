@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">github-sample</string>
+    <string name="more_detail">See more detail.</string>
 </resources>
