@@ -29,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initViewController() {
-        homeViewController = HomeViewController(main_list_user) { item, _ ->
+        homeViewController = HomeViewController(main_root) { item, _ ->
             when (item) {
                 is CardRowItem -> {
                     when (item.type) {
@@ -57,15 +57,6 @@ class HomeActivity : AppCompatActivity() {
     private fun initViewModel() {
         _viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
-        _viewModel.loading.observe(this, Observer { loading ->
-            main_progress.apply {
-                visibility = if (loading) {
-                    View.VISIBLE
-                } else {
-                    View.GONE
-                }
-            }
-        })
         _viewModel.homeViewData.observe(this, Observer {
             it.data?.let {
                 homeViewController.update(it)

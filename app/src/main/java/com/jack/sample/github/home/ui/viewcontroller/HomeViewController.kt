@@ -2,14 +2,14 @@ package com.jack.sample.github.home.ui.viewcontroller
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.jack.sample.github.base.recyclerview.item.BaseCardItem
 import com.jack.sample.github.base.viewcontroller.BaseViewController
 import com.jack.sample.github.recyclerview.row.RowAdapter
 import com.jack.sample.github.recyclerview.row.item.CardRowItem
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 class HomeViewController(
-    view: RecyclerView,
+    view: View,
     onCardClicked: ((item: BaseCardItem, view: View) -> Unit)?
 ) : BaseViewController<List<CardRowItem>>(view) {
 
@@ -17,8 +17,11 @@ class HomeViewController(
 
     init {
         view.apply {
-            this.adapter = rowAdapter
-            this.layoutManager = LinearLayoutManager(context)
+            main_list_user.apply {
+                adapter = rowAdapter
+                layoutManager = LinearLayoutManager(context)
+            }
+            main_progress.visibility = View.VISIBLE
         }
     }
 
@@ -41,6 +44,9 @@ class HomeViewController(
             it.clearItems()
             it.addItems(cardRowList)
             it.notifyItemRangeChanged(1, cardRowList.lastIndex)
+        }
+        view.apply {
+            main_progress.visibility = View.GONE
         }
     }
 
