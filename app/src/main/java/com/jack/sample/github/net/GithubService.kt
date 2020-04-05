@@ -2,6 +2,7 @@ package com.jack.sample.github.net
 
 import com.jack.sample.github.BuildConfig
 import com.jack.sample.github.home.data.entity.User
+import com.jack.sample.github.home.data.entity.UserDetail
 import com.jack.sample.github.home.data.entity.UserRepo
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
@@ -27,10 +28,10 @@ interface GithubService {
         @Url url: String
     ): Response<List<User>>
 
-//    @GET("/users/{username}")
-//    fun getUserIntro (
-//        @Path(value = "username") username: String
-//    ): Single<UserIntro>
+    @GET("/users/{username}")
+    suspend fun getUserDetail(
+        @Path(value = "username") username: String
+    ): Response<UserDetail>
 
     @GET("/users/{user}/repos")
     suspend fun getUserRepos(
