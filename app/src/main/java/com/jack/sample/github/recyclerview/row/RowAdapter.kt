@@ -1,6 +1,5 @@
 package com.jack.sample.github.recyclerview.row
 
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.jack.sample.github.base.recyclerview.adapter.BaseViewAdapter
@@ -17,7 +16,7 @@ class RowAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<CardRowItem> {
         return when(CardRowType.fromId(viewType)) {
-            CardRowType.REPOSITORY -> {
+            CardRowType.USER_REPO -> {
                 UserRepoViewHolder(parent, onCardClicked)
             }
             CardRowType.PAGED_CARDS -> {
@@ -32,5 +31,5 @@ class RowAdapter(
         }
     }
 
-    override fun getItemViewType(position: Int): Int = getItem(position)?.type?.id ?: CardRowType.REPOSITORY.id
+    override fun getItemViewType(position: Int): Int = getItem(position)?.type?.id ?: CardRowType.USER_REPO.id
 }

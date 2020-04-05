@@ -1,6 +1,7 @@
 package com.jack.sample.github.home.data.entity
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class User(
     @SerializedName("id") val id: Long,
@@ -8,4 +9,4 @@ data class User(
     @SerializedName("avatar_url") val avatar_url: String,
     @SerializedName("url") val url:String,
     @SerializedName("repos_url") val repos_url: String
-)
+): Serializable

@@ -5,4 +5,4 @@ import com.jack.sample.github.home.data.entity.UserRepo
 
 class RepoRowItem(
     val userRepo: UserRepo
-) : CardRowItem(CardRowType.REPOSITORY)
+) : CardRowItem(CardRowType.USER_REPO)

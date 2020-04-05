@@ -6,6 +6,7 @@ import com.jack.sample.github.home.data.repository.UserRepoRemoteDateSource
 import com.jack.sample.github.base.repository.BaseRepoData
 import com.jack.sample.github.home.data.HomeViewData
 import com.jack.sample.github.home.data.entity.User
+import com.jack.sample.github.home.data.entity.UserRepo
 import com.jack.sample.github.home.data.repository.UserRepoRepository
 import com.jack.sample.github.home.data.repository.UserRepoViewData
 import com.jack.sample.github.home.data.repository.UserRepository
@@ -25,11 +26,11 @@ class HomeViewModel : ViewModel(), CoroutineScope by MainScope() {
 
     val homeViewData = MutableLiveData<HomeViewData>()
 
-    val _userRepoList = MutableLiveData<BaseRepoData<UserRepoViewData>>()
-    val userRepoList = Transformations.map(_userRepoList) {
+    private val _userRepoList = MutableLiveData<BaseRepoData<UserRepoViewData>>()
+    val userRepoList: LiveData<List<UserRepo>> = Transformations.map(_userRepoList) {
         it.viewData.value?.userRepoList
     }
-    val userRepoRowData = Transformations.map(userRepoList) {
+    val userRepoRowData: LiveData<List<CardRowItem>> = Transformations.map(userRepoList) {
         it?.map { repo ->
             RepoRowItem(repo)
         }
@@ -68,6 +69,7 @@ class HomeViewModel : ViewModel(), CoroutineScope by MainScope() {
                     Timber.e("fetch users failed.")
                 }
             }
+
             override fun onChanged(position: Int, count: Int) {}
             override fun onRemoved(position: Int, count: Int) {}
 

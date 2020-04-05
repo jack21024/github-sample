@@ -65,7 +65,7 @@ class UsersDataSource : PageKeyedDataSource<String, CardItem>(), CoroutineScope 
             response.body()?.run {
                 return UserPage(
                     this.map {
-                        CardItem(it.id.hashCode(), CardType.AVATAR, it)
+                        CardItem(it)
                     },
                     GithubPageLinks.getNext(response.headers())
                 )

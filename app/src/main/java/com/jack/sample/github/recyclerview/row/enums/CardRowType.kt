@@ -2,8 +2,8 @@ package com.jack.sample.github.recyclerview.row.enums
 
 enum class CardRowType(val id: Int) {
 
-    REPOSITORY(100),
-    PAGED_CARDS(200);
+    PAGED_CARDS(100),
+    USER_REPO(200);
 
     companion object {
 
@@ -13,7 +13,7 @@ enum class CardRowType(val id: Int) {
                     return it
                 }
             }
-            return REPOSITORY
+            return USER_REPO
         }
 
     }

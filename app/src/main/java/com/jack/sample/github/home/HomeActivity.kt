@@ -2,13 +2,13 @@ package com.jack.sample.github.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.jack.sample.github.R
 import com.jack.sample.github.home.ui.viewmodel.HomeViewModel
-import com.jack.sample.github.home.viewcontroller.HomeViewController
+import com.jack.sample.github.home.ui.viewcontroller.HomeViewController
 import com.jack.sample.github.recyclerview.card.enums.CardType
 import com.jack.sample.github.recyclerview.card.item.CardItem
 import com.jack.sample.github.recyclerview.row.item.CardRowItem
@@ -28,10 +28,10 @@ class HomeActivity : AppCompatActivity() {
 
     lateinit var homeViewController: HomeViewController
     private fun initViewController() {
-        homeViewController = HomeViewController(main_list_user) { item, view ->
+        homeViewController = HomeViewController(main_list_user) { item, _ ->
             when(item) {
                 is CardRowItem -> {
-
+                    Toast.makeText(this, "${item} clicked.", Toast.LENGTH_LONG).show()
                 }
                 is CardItem -> {
                     when(item.type) {
