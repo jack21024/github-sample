@@ -2,9 +2,9 @@ package com.jack.sample.github.home.ui.viewmodel
 
 import androidx.lifecycle.*
 import androidx.paging.PagedList
+import com.jack.sample.github.home.api.UserListApi
 import com.jack.sample.github.home.data.repository.UserRepoRemoteDateSource
 import com.jack.sample.github.home.data.HomeViewData
-import com.jack.sample.github.home.data.entity.User
 import com.jack.sample.github.home.data.repository.UserRepoRepository
 import com.jack.sample.github.home.data.repository.UserRepository
 import com.jack.sample.github.recyclerview.card.item.CardItem
@@ -60,59 +60,32 @@ class HomeViewModel : ViewModel(), CoroutineScope by MainScope() {
     }
 
     private val userLiveDataObserver = Observer<PagedList<CardItem>> {
-//        it.addWeakCallback(it, object : PagedList.Callback() {
-//            override fun onInserted(position: Int, count: Int) {
-//                it.removeWeakCallback(this)
-//                if (count > 0) {
-//                    Timber.d("users is fetched at first, load repositories.")
-//
-//                    createHomeViewData(it)
-//                } else {
-//                    Timber.e("fetch users failed.")
-//                }
-//            }
-//
-//            override fun onChanged(position: Int, count: Int) {}
-//            override fun onRemoved(position: Int, count: Int) {}
-//
-//        })
         createHomeViewData(it)
+        createUserRepoViewData()
     }
 
     private fun createHomeViewData(userList: PagedList<CardItem>) {
-        launch(Dispatchers.IO) {
-            var user = if(userList.isNotEmpty()) {
-                userList.first().user
-            } else {
-                null
-            }
-            val cardRowList = ArrayList<CardRowItem>().apply {
+        homeViewData.postValue(HomeViewData().apply {
+            data = ArrayList<CardRowItem>().apply {
                 add(PagedCardRowItem(userList))
-                user?.let {
-                    addAll(getUserRepoCardList(user))
-                }
             }
-            homeViewData.postValue(HomeViewData().apply {
-                data = cardRowList
-            })
+        })
+    }
+
+    private fun createUserRepoViewData() {
+        launch(Dispatchers.IO) {
+            val userData = async {
+                UserListApi()
+                    .setRange(0,1)
+                    .start()
+            }
+            val user = userData.await().result?.first()
+            user?.let {
+               getUserRepoList(it.login)
+            }
+
         }
     }
 
-    private suspend fun getUserRepoCardList(user: User): List<CardRowItem> {
-        val userRepoViewData = async {
-            user.let {
-                userRepoRepository.getUserRepoList(it.login)
-            }
-        }
-        val repoList = userRepoViewData.await()?.viewData?.value?.userRepoList
-
-        return ArrayList<CardRowItem>().apply {
-            repoList?.let { list ->
-                addAll(list.map { repo ->
-                    RepoRowItem(repo)
-                })
-            }
-        }
-    }
 }
 
