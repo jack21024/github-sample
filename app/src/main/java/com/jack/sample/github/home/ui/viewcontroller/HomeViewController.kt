@@ -1,4 +1,4 @@
-package com.jack.sample.github.home.viewcontroller
+package com.jack.sample.github.home.ui.viewcontroller
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
